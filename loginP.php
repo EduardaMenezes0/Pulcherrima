@@ -22,7 +22,7 @@ if (!isset($b1) && !isset($b2)) {
       </div>
 
       <!-- Formulário de login funcional simples -->
-      <form action='login.php' method='post'>
+      <form action='loginP.php' method='post'>
         <input type='text' name='user'>
         <input type='password' name='password'>
         <input type='submit' name='b1' value='Cadastrar'>
