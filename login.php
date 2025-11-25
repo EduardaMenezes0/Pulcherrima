@@ -1,33 +1,87 @@
 <?php
-$current_timezone = date_default_timezone_get();
-if (!isset($_POST['b1'])) {
-    echo "<!DOCTYPE html>
-    <html lang='pt-BR'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Login</title>
-        <link rel='stylesheet' href='style.css'>
-    </head>
-    <body>
-     <div class='container'>
-        <h1>Acesse sua conta</h1>
-        </br>
-        <form method='POST'>
+include "DLL.php"; //julia assis santos
+extract($_POST);
+session_start();
+
+date_default_timezone_set('America/Bahia');
+$dataHora = date("d/m/Y H:i:s");
+
+
+if (!isset($b1)) {
+    
+    $mensagem_status = "";
+    if (isset($_GET['erro'])) {
+        $mensagem_status = "<p style='color: red; font-weight: 600;'>" . htmlspecialchars($_GET['erro']) . "</p>";
+    } elseif (isset($_GET['sucesso'])) {
+        $mensagem_status = "<p style='color: green; font-weight: 600;'>" . htmlspecialchars($_GET['sucesso']) . "</p>";
+    }
+    
+    echo "
+    <html>
+      <head>
+        <title>Login | Studio Pulcherrima</title>
+        <link rel='stylesheet' href='style/style.css'>
+      </head>
+      <body class='login-body'>
+          <div class='login-wrapper'>
+          
+          <div class='hero-text'>
+            <h1 class='brand-title'>PULCHERRIMA</h1>
+            <p class='cta'>Acesse sua conta</p>
+            <p class='tagline'>Beleza e elegância em cada detalhe — junte-se à Pulcherrima.</p>
+            <p class='subtitle-visual'>Explore os recursos que Pulcherrima pode oferecer.</p>
+          </div>
+
+          $mensagem_status
+          
+          <form action='login.php' method='post'>
+            <label for='email'>Email:</label>
+            <input type='text' name='user' placeholder='seu.email@exemplo.com' required>
+            <label for='senha'>Senha:</label>
+            <input type='password' name='password' required>
+            <input type='submit' name='b1' value='Entrar' class='btn-primary'>
             <p>
-                <label for='login'>Login:</label>
-                <input type='text' id='login' name='Login'><br>
+                <a href='cadastro.php'>Não tem cadastro? Cadastre-se aqui.</a>
             </p>
             <p>
-                <label for='senha'>Senha:</label>
-                <input type='password' id='Senha' name='Senha' <br>
+            <a href='recuperar_senha.php'>Esqueceu sua senha?</a>
             </p>
-            <p>
-                <input type ='submit' name = 'b1' value = 'Verificar Autenticação'>
-            </p>
-        </form>
-    </div>
-    </body>
-    </html>";
+          </form>
+          </div>
+      </body>
+    </html>
+    ";
+
 }
-    session_start();
+
+if (isset($b1)) {
+  $email_digitado = $user; 
+  $senha_digitada = $password;
+  $consulta = "SELECT id_cliente, senha_cripto FROM Clientes WHERE email = '$email_digitado'";
+
+
+  $result = banco("localhost","root","060423","pulcherrima_bd",$consulta);
+  
+  if ($result->num_rows == 1) {
+    $usuario = $result->fetch_assoc();
+    $hash_salvo = $usuario['senha_cripto']; 
+
+    if (password_verify($senha_digitada, $hash_salvo)) {
+      $_SESSION['id_cliente'] = $usuario['id_cliente'];
+      $_SESSION['logado'] = 'ok';
+            
+      
+      header("Location: menu.php"); 
+      exit();
+            
+    } else {
+      $mensagem_erro = "E-mail ou senha incorretos. (Senha inválida)"; 
+  }
+  } else {
+    $mensagem_erro = "E-mail ou senha incorretos. (Usuário não encontrado)"; 
+}
+    header("Location: login.php?erro=" . urlencode($mensagem_erro));
+    exit();
+
+}
+?>
