@@ -1,0 +1,13 @@
+<?php
+$para = "julyaassissantos@gmail.com";
+$assunto = "bem-vindo ao pulquerrima";
+$corpo = "Olá, queriamos dar as boas vindas ao nosso site da pulquerrima esperamos que aproveitem os nossos serviços";
+$headers = "from:julyaassissantos@gmail.com";
+ 
+if (mail($para,$assunto,$ccorpo,$headers)) {
+   echo "email enviado para $para com sucesso!";
+}
+   else{
+      echo "falha no envio do email";
+   }
+?>
