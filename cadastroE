@@ -1,0 +1,82 @@
+<?php
+
+include "DLL.php"; //Maria Eduarda Menezes
+
+extract($_POST);
+
+if (!isset($_POST['b1'])) {
+
+    echo "<!DOCTYPE html>
+    <html lang='pt-BR'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Cadastre-se</title>
+    <link rel='stylesheet' href='style/style.css'>
+    </head>
+    <body>
+    <div class='container-principal'>
+  <div class='coluna-imagem'>
+    </div>
+  <div class='coluna-formulario'>
+     <div class='container'>
+        <h1>Faça seu Cadastro</h1>
+        </br>
+        <form method='POST'>
+            <p>
+                <div>
+                    <label for='nome'>Nome Completo:</label>
+                    <input type='text' id='nome' name='nome' placeholder = 'Nome Completo'><br>
+                </div>
+            </p>
+            <p>
+                <label for='data'>Data de Nascimento:</label>
+                <input type='date' id='data' name='data' placeholder = ''><br>
+            </p>
+            <p>
+                <label for='email'>Email:</label>
+                <input type='text' id='email' name='email' placeholder = 'Email'><br>
+            </p>
+            <p>
+                <label for='telefone'>Telefone:</label>
+                <input type='text' id='telefone' name='telefone' placeholder = '(xx)xxxxx-xxxx'><br>
+            </p>
+            <p>
+                <label for='senha'>Senha:</label>
+                <input type='password' id='senha' name='senha'><br>
+            </p>
+            <p>
+                <input type ='submit' name = 'b1' value = 'Fazer Cadastro'>
+                <input type ='submit' name = 'b2' value = 'Já tenho cadastro'>
+            </p>
+        </form>
+    </div>
+    </body>
+    </html>";
+
+}
+
+if(isset($b1)){
+
+    $senha_cripto = password_hash($senha, PASSWORD_DEFAULT);
+
+    $senha_cripto = password_hash($senha, PASSWORD_DEFAULT);
+
+    $consulta ="INSERT INTO `clientes` (nome_cliente, data_nascimento, email, telefone, senha_cripto) VALUES ('$nome', '$data', '$email', '$telefone', '$senha_cripto')";
+
+    $result = banco("localhost","root","060423","pulcherrima_bd",$consulta);
+
+    //email automático - Julya Assis 
+    $para = $email; // envia para o email que o usuário cadastrou
+    $assunto = "Bem-vindo ao Pulquerrima!";
+    $corpo = "Olá, $nome!\n\nSeja bem-vindo ao nosso site Pulquerrima.\nAproveite nossos serviços!";
+    $headers = "From: julyaassissantos@gmail.com";
+
+    mail($para, $assunto, $corpo, $headers);
+
+
+    header("Location: login.php?sucesso=" . urlencode("Cadastro realizado com sucesso! Faça seu login."));
+    exit();
+}
+
+?>
