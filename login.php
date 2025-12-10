@@ -1,5 +1,5 @@
 <?php
-include "DLL.php"; //julia assis santos
+include "DLL.php"; //Maria Eduarda Menezes e Julia Assis
 extract($_POST);
 session_start();
 
@@ -55,31 +55,33 @@ if (!isset($b1)) {
 }
 
 if (isset($b1)) {
-  $email_digitado = $user; 
-  $senha_digitada = $password;
-  $consulta = "SELECT id_cliente, senha_cripto FROM Clientes WHERE email = '$email_digitado'";
+    $email_digitado = $user; 
+    $senha_digitada = $password;
+    
+    $senha_md5_digitada = md5($senha_digitada); 
+    
+    $consulta = "SELECT id_cliente, senha_cripto FROM Clientes WHERE email = '$email_digitado'";
 
+    $result = banco("localhost","root","060423","pulcherrima_bd",$consulta);
+    
+    if ($result->num_rows == 1) {
+        $usuario = $result->fetch_assoc();
+        $cripto_salvo = $usuario['senha_cripto']; 
 
-  $result = banco("localhost","root","060423","pulcherrima_bd",$consulta);
-  
-  if ($result->num_rows == 1) {
-    $usuario = $result->fetch_assoc();
-    $hash_salvo = $usuario['senha_cripto']; 
-
-    if (password_verify($senha_digitada, $hash_salvo)) {
-      $_SESSION['id_cliente'] = $usuario['id_cliente'];
-      $_SESSION['logado'] = 'ok';
-            
       
-      header("Location: menu.php"); 
-      exit();
-            
+        if ($senha_md5_digitada === $cripto_salvo) { 
+            $_SESSION['id_cliente'] = $usuario['id_cliente'];
+            $_SESSION['logado'] = 'ok';
+                    
+            header("Location: inicio.php"); 
+            exit();
+                    
+        } else {
+            $mensagem_erro = "E-mail ou senha incorretos. (Senha inválida)"; 
+        }
     } else {
-      $mensagem_erro = "E-mail ou senha incorretos. (Senha inválida)"; 
-  }
-  } else {
-    $mensagem_erro = "E-mail ou senha incorretos. (Usuário não encontrado)"; 
-}
+        $mensagem_erro = "E-mail ou senha incorretos. (Usuário não encontrado)"; 
+    }
     header("Location: login.php?erro=" . urlencode($mensagem_erro));
     exit();
 

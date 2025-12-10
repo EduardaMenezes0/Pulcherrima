@@ -1,5 +1,6 @@
 <?php
-include "DLL.php"; //Maria Eduarda Menezes
+ //Maria Eduarda Menezes e Julia Assis
+include "DLL.php";
 extract($_POST);
 
 if (!isset($_POST['b1'])) {
@@ -43,8 +44,8 @@ if (!isset($_POST['b1'])) {
                 <input type='password' id='senha' name='senha'><br>
             </p>
             <p>
-                <input type ='submit' name = 'b1' value = 'Fazer Cadastro'>
-                <input type ='submit' name = 'b2' value = 'Já tenho cadastro'>
+                <input type ='submit' name = 'b1' value = 'Fazer Cadastro'  class='btn-secondary'>
+                <input type ='submit' name = 'b2' value = 'Já tenho cadastro'  class='btn-primary'>
             </p>
         </form>
     </div>
@@ -52,13 +53,14 @@ if (!isset($_POST['b1'])) {
     </html>";
 }
  if(isset($b1)){
-    $senha_cripto = password_hash($senha, PASSWORD_DEFAULT);
-
-    $senha_cripto = password_hash($senha, PASSWORD_DEFAULT);
+    $senha_cripto = md5($senha);
         
     $consulta ="INSERT INTO `clientes` (nome_cliente, data_nascimento, email, telefone, senha_cripto) VALUES ('$nome', '$data', '$email', '$telefone', '$senha_cripto')";
             
     $result = banco("localhost","root","060423","pulcherrima_bd",$consulta);
     header("Location: login.php?sucesso=" . urlencode("Cadastro realizado com sucesso! Faça seu login."));
     exit();
+}
+ if(isset($b2)){
+   header("Location: login.php?");
 }
