@@ -1,5 +1,9 @@
+/* style/style.css - Estilo Pulcherrima */
+
+/* Importação de Fontes (Playfair Display e Inter) */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
 
+/* Variáveis de Cores e Fontes */
 :root {
     --color-primary: #8B5E3C; /* Marrom/Dourado Escuro */
     --color-secondary: #EADDCD; /* Creme Claro */
@@ -20,8 +24,8 @@ body {
 }
 
 /* ------------------------------------
-   Estilo da Página de Cadastro (Duas Colunas)
-   ------------------------------------ */
+    Estilo da Página de Cadastro (Duas Colunas)
+    ------------------------------------ */
 .container-principal-cadastro {
     display: flex;
     min-height: 100vh;
@@ -30,7 +34,7 @@ body {
 
 .coluna-imagem {
     flex: 1; 
-    /* Placeholder de fundo elegante para a coluna de imagem, remetendo a beleza */
+    /* Placeholder de fundo elegante para a coluna de imagem */
     background: url('https://placehold.co/1000x1200/8B5E3C/EADDCD?text=Studio+Pulcherrima') center/cover no-repeat;
     position: relative;
     overflow: hidden;
@@ -65,8 +69,8 @@ body {
 }
 
 /* ------------------------------------
-   Estilo de Títulos e Formulário
-   ------------------------------------ */
+    Estilo de Títulos e Formulário
+    ------------------------------------ */
 h1 {
     font-family: var(--font-title);
     font-weight: 700;
@@ -83,11 +87,11 @@ label {
     font-size: 0.95rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-input[type="tel"] {
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
+input[type='tel'] {
     width: 100%;
     padding: 0.8rem;
     margin-top: 0.25rem;
@@ -98,11 +102,11 @@ input[type="tel"] {
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus,
-input[type="tel"]:focus {
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+input[type='date']:focus,
+input[type='tel']:focus {
     border-color: var(--color-primary);
     outline: none;
 }
@@ -126,7 +130,7 @@ input[type="tel"]:focus {
     flex-grow: 1;
 }
 
-.btn-primary { /* Fazer Cadastro / Entrar */
+.btn-primary { /* Fazer Cadastro / Entrar / Descobrir Tratamentos */
     background-color: var(--color-primary);
     color: var(--color-text-light);
 }
@@ -135,7 +139,7 @@ input[type="tel"]:focus {
     opacity: 0.9;
 }
 
-.btn-secondary { /* Já tenho cadastro */
+.btn-secondary { /* Já tenho cadastro / Ver Portfólio Completo */
     background-color: transparent;
     border: 2px solid var(--color-primary);
     color: var(--color-primary);
@@ -148,12 +152,16 @@ input[type="tel"]:focus {
 
 
 /* ------------------------------------
-   Estilo da Página de Login (Fundo Full-Screen)
-   ------------------------------------ */
+    Estilo da Página de Login (Fundo Full-Screen)
+    ------------------------------------ */
 .login-body {
-    /* Fundo elegante para a tela de login */
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), 
-                url('https://placehold.co/1920x1080/8B5E3C/EADDCD?text=Studio+Pulcherrima+Login') center/cover no-repeat fixed;
+/* 1. MANTÉM o filtro escuro que você gosta */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)); 
+    
+    /* 2. ADICIONA uma cor sólida para garantir a base escura sem imagem */
+    background-color: var(--color-primary); /* Usa o marrom/dourado escuro */
+
+    /* Altura e alinhamento */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -202,17 +210,19 @@ input[type="tel"]:focus {
 }
 
 /* ------------------------------------
-   Estilo da Navegação (Menu - Menu.php)
-   ------------------------------------ */
+    Estilo da Navegação (Menu)
+    ------------------------------------ */
 .menu-page-body {
     background: #f8f8f8;
-    height: 100vh;
-    padding-top: 5rem;
+    /* Ajustado para zero (o padding está no .hero-content) */
+    padding-top: 0; 
 }
 
 nav {
-    position: fixed;
+    /* Define o nav para ocupar toda a largura superior */
+    position: absolute; 
     top: 2rem;
+    left: 2rem; 
     right: 2rem;
     z-index: 1000;
 }
@@ -221,20 +231,28 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
+    display: flex; 
     gap: 1rem;
+    /* Alinha o menu à direita */
+    justify-content: flex-end; 
+    flex-wrap: wrap; 
 }
 
+/* Estilo do link do menu é adaptado para o banner/fundo escuro */
 nav ul li a {
     text-decoration: none;
     font-family: var(--font-body);
     font-weight: 500;
     color: var(--color-text-light); 
     padding: 0.7rem 1.2rem;
-    border-radius: 9999px; /* Formato de cápsula */
-    background-color: rgba(0, 0, 0, 0.1); /* Fundo sutil e transparente */
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda fina clara */
-    transition: background-color 0.3s, color 0.3s;
+    border-radius: 9999px; /* Formato cápsula */
+    
+    /* Fundo semi-sólido para garantir contraste */
+    background-color: var(--color-primary); 
+    opacity: 0.85; 
+    
+    border: 1px solid rgba(255, 255, 255, 0.5); 
+    transition: background-color 0.3s, color 0.3s, opacity 0.3s;
     display: block;
 }
 
@@ -242,33 +260,138 @@ nav ul li a:hover {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
     color: var(--color-text-light); 
+    opacity: 1; 
 }
 
-/* Título de exemplo da página principal (como na imagem) */
+/* Título e Banner da Página Principal */
 .hero-content {
-    max-width: 800px;
-    margin: 5rem auto 0;
+    /* Novo: Adiciona imagem de fundo e borda arredondada */
+    
+    /* Mantém o degradê suave de cima para baixo */
+    background: linear-gradient(180deg, rgba(234, 221, 205, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%); 
+    
+    /* Define uma cor sólida como base */
+    background-color: var(--color-secondary); /* Usa o Creme Claro */
+
+    /* Aumentar o padding-top para dar espaço ao menu que está no topo (2rem) */
+    padding: 10rem 2rem 4rem; 
     text-align: center;
     color: var(--color-text-dark);
+    border-radius: 0 0 50% 50% / 0 0 10% 10%; /* Borda inferior arredondada sutil */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
 }
-
 .main-title {
     font-family: var(--font-title);
-    font-size: 4.5rem;
+    font-size: 4rem; 
     line-height: 1.1;
     margin-bottom: 0.5rem;
     color: var(--color-primary);
+    max-width: 90%; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .sub-title {
     font-family: var(--font-body);
     font-size: 1.5rem;
     font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* ------------------------------------
-   Responsividade
-   ------------------------------------ */
+    ESTILOS PARA A SEÇÃO ANTES E DEPOIS
+    ------------------------------------ */
+.before-after-section {
+    padding: 3rem 2rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+/* 1. FLEX PRINCIPAL (Cards Lado a Lado) - NOVO MÉTODO */
+.visual-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha */
+    justify-content: center; /* Centraliza os cards */
+    gap: 2rem;
+}
+
+.visual-card {
+    /* NOVO: Define uma largura base para 2 ou 3 cards por linha */
+    flex: 1 1 300px; 
+    max-width: 300px; /* Limite máximo para o card não ficar muito largo */
+    
+    background-color: var(--color-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.visual-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.procedure-label {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* 2. WRAPPER DE IMAGEM (Fotos Antes/Depois Lado a Lado) */
+.image-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: #fff;
+}
+
+.image-container {
+    /* Mantém 50% para que Antes e Depois fiquem exatamente lado a lado */
+    width: 50%; 
+    text-align: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    /* Garante que a imagem preencha a área, mantendo a proporção */
+    object-fit: cover; 
+    aspect-ratio: 1 / 1.2; 
+    border: 2px solid var(--color-secondary);
+}
+
+.image-container p {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0.5rem 0 0;
+}
+
+/* ------------------------------------
+    Responsividade
+    ------------------------------------ */
 @media (max-width: 900px) {
     .container-principal-cadastro {
         flex-direction: column;
@@ -281,7 +404,7 @@ nav ul li a:hover {
     .coluna-formulario {
         padding: 1rem;
     }
-    
+
     .form-container {
         padding: 1.5rem;
     }
@@ -297,26 +420,56 @@ nav ul li a:hover {
     }
 
     nav {
+        /* No mobile, o nav se torna static e full-width */
         position: static;
-        margin-top: 1rem;
+        margin-top: 0; 
         display: flex;
         justify-content: center;
         width: 100%;
-        padding: 1rem;
-        background: var(--color-primary);
-    }
-
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
+        padding: 1rem 0; 
+        background: var(--color-primary); 
+        top: 0;
+        right: 0;
+        left: 0; 
+        margin-bottom: 1.5rem; 
     }
     
+    nav ul {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    nav ul li a {
+        /* Inverter cores para alto contraste na barra primária */
+        background-color: var(--color-secondary); 
+        border-color: var(--color-secondary); 
+        color: var(--color-primary); 
+        opacity: 1;
+    }
+
+    nav ul li a:hover {
+        background-color: var(--color-text-light); 
+        border-color: var(--color-text-light);
+    }
+
     .hero-content {
-        margin: 2rem auto;
+        /* Ajustado para mobile */
+        margin: 0; 
+        padding: 4rem 1rem 2rem;
+        border-radius: 0; 
     }
 
     .main-title {
         font-size: 3rem;
+    }
+
+    .menu-page-body {
+        padding-top: 0; 
+    }
+
+    .before-after-section {
+        padding: 2rem 1rem 3rem;
     }
 }
