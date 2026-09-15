@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-color: #FDF5F2;
+}
+
+.pagina {
+    display: flex;
+    min-height: 100vh;
+}
+
+.coluna-visual {
+    flex: 1;
+    background: linear-gradient(135deg, #274a28, #4a7a4d);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.coluna-formulario {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+@media (max-width: 800px) {
+    .pagina {
+        flex-direction: column;
+    }
+    .coluna-visual {
+        order: -1;
+        padding: 30px 20px;
+    }
+}
+
+.cartao {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cartao h1,
+.cartao h2 {
+    margin-top: 0;
+    color: #274a28;
+}
+
+.campo {
+    margin-bottom: 14px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.campo input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.botao {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    background-color: #274a28;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.botao:hover {
+    background-color: #162e17;
+}
+
+.botao-secundario {
+    background-color: transparent;
+    color: #274a28;
+    border: 1px solid #274a28;
+}
+
+.botao-secundario:hover {
+    background-color: #f1f1f1;
+}
+
+.mensagem {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+.mensagem-erro {
+    background: #fdecea;
+    color: #a12622;
+}
+
+.mensagem-sucesso {
+    background: #e6f4ea;
+    color: #1e4620;
+}
+
+.brand-title {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.tagline {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.rodape-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.rodape-link a {
+    color: #274a28;
+}
+
+.construcao {
+    max-width: 480px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 30px;
+}
